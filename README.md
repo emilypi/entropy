@@ -1,4 +1,4 @@
-## Symbiont.io Interiew Question 2018
+## Symbiont.io Question 2018
 
 "create a clone of `cat /dev/random`, generating your own entropy"
 
