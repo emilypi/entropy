@@ -1,8 +1,6 @@
 -- | Main interface to our tcpdump-based entropy generator
 -- note: uses combinators from Util.hs to do the bulk of the
 -- pointer juggling.
-
-{-# LANGUAGE OverloadedStrings #-}
 module Tcp ( tcpdump, tcpstream ) where
 
 
@@ -10,7 +8,7 @@ import           Data.Functor ((<$))
 import           System.IO    (Handle)
 import           Util         (allocateBlock, buffer, exec, pipeTo)
 
--- | Generate entropy from en0, reading in 256 bytes to stderr and stdout
+-- | Generate entropy from en0, writing 256 bytes to stderr and stdout
 tcpdump :: IO ()
 tcpdump = exec allocateBlock nullBlock
 

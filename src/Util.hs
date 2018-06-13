@@ -23,6 +23,7 @@ buffer
   -> IO Int
 buffer h p = hGetBuf h p 256
 
+-- | Allocate 256 bytes to buffer, piping to stderr in the case of IOException
 allocateBlock
   :: Handle -- ^allocate 256 foreign bytes to buffer on this handle
   -> IO ()
@@ -44,6 +45,7 @@ pipeTo f h = do
 
 -- | call tcpdump and allow provide handlers to work with stderr and stdout outcomes
 -- The tcpdump arguments are as follows:
+--
 -- K: don't verify checksums
 -- n: don't convert addresses to names
 -- O: no optimizations
