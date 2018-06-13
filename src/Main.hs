@@ -1,4 +1,3 @@
-{-# LANGUAGE ScopedTypeVariables #-}
 module Main where
 
 import           System.Environment (getArgs)
@@ -7,6 +6,7 @@ import           System.IO          (BufferMode (NoBuffering),
 import           Tcp                (tcpdump, tcpstream)
 
 
+-- | We support a very minimal number of args here to make it easier
 parseArgs :: [String] -> IO ()
 parseArgs ["--tcp"]    = tcpdump
 parseArgs ["--stream"] = tcpstream
