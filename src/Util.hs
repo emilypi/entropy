@@ -1,7 +1,6 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 module Util
-  (
-    buffer
+  ( buffer
   , allocateBlock
   , pipeTo
   , exec
