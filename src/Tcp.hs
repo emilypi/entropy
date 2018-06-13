@@ -12,7 +12,7 @@ import           Util         (allocateBlock, buffer, exec, pipeTo)
 
 -- | Generate entropy from en0, reading in 256 bytes to stderr and stdout
 tcpdump :: IO ()
-tcpdump =exec allocateBlock nullBlock
+tcpdump = exec allocateBlock nullBlock
 
 tcpstream :: IO ()
 tcpstream = exec entropyStream nullStream
