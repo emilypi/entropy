@@ -44,16 +44,9 @@ pipeTo f h = do
   p <- mallocForeignPtrBytes 256
   withForeignPtr p (f h)
 
--- | call tcpdump and allow provide handlers to work with stderr and stdout outcomes
--- The tcpdump arguments are as follows:
---
--- K: don't verify checksums
--- n: don't convert addresses to names
--- O: no optimizations
--- S: print absolute TCP sequences numbers
--- x: to hex + headers
--- vvv: highest verbosity
--- i: interface
+-- | Create shell process, executing a command and handling
+-- writing to stdout via some write function, and
+-- handling stderr output with another.
 exec
   :: (Handle -> IO ()) -- ^ handle stdout
   -> (Handle -> IO ()) -- ^ handle stderr

@@ -6,10 +6,6 @@ import           Data.Text.Lazy (Text)
 import           System.IO      (Handle)
 import           Util           (allocateBlock, buffer, exec, pipeTo)
 
--- | Main interface to our tcpdump-based entropy generator
--- note: uses combinators from Util.hs to do the bulk of the
--- pointer juggling.
-
 
 -- | Generate entropy from en0, writing 256 bytes to stderr and stdout
 tcpdump :: IO ()
@@ -37,5 +33,15 @@ nullStream
 nullStream = pipeTo go
   where go h p = buffer h p *> go h p
 
+-- | This is the main command we will use.
+-- The tcpdump arguments are as follows:
+--
+-- K: don't verify checksums
+-- n: don't convert addresses to names
+-- O: no optimizations
+-- S: print absolute TCP sequences numbers
+-- x: to hex + headers
+-- vvv: highest verbosity
+-- i: interface
 tcpcmd :: Text
 tcpcmd = "tcpdump -KnOSx -vvv -i en0 | hexdump -x"
