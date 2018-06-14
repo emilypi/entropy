@@ -60,7 +60,9 @@ exec
 exec _out _err = do
   (_, Just hout, Just herr, _) <-
     createProcess (shell "tcpdump -KnOSx -vvv -i en0 | hexdump -x")
-    { std_out = CreatePipe, std_err = CreatePipe }
+    { std_out = CreatePipe
+    , std_err = CreatePipe
+    }
   forkIO (_err herr)
   _out hout
 
