@@ -7,8 +7,7 @@ This project uses `tcpdump` and `hexdump` to generate hardware entropy in the ve
 
 To run the project, remember that on Mac OS X, at least, to use `tcpdump`, superuser access is necessary, so one must run `sudo cabal run` and provide any of the array of the following options:
 
-- --tcpdump: Dumps a single 256 byte block of tcp data
-- --tcp --stream: Streams 256 byte blocks of tcp data
-- Nothing: defaults to `--tcpdump`.
+- [--tcpdump | --tcp | noargs]: Dumps a single 256 byte block of tcp data
+- [--tcp --s | --stream]: Streams 256 byte blocks of tcp data
 
 If the interviewer requests it, I would love to implement a Cha-Cha or Salsa20 stream cipher and add those options as well.
