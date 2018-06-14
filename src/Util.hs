@@ -8,6 +8,7 @@ module Util
 
 import           Control.Concurrent (forkIO)
 import           Control.Exception  (IOException, catch)
+import           Data.Text.Lazy     (Text, unpack)
 import           Foreign.ForeignPtr (mallocForeignPtrBytes, withForeignPtr)
 import           Foreign.Ptr        (Ptr)
 import           System.Exit        (exitSuccess)
@@ -56,10 +57,11 @@ pipeTo f h = do
 exec
   :: (Handle -> IO ()) -- ^ handle stdout
   -> (Handle -> IO ()) -- ^ handle stderr
+  -> Text -- ^ command to run
   -> IO ()
-exec _out _err = do
+exec _out _err cmd = do
   (_, Just hout, Just herr, _) <-
-    createProcess (shell "tcpdump -KnOSx -vvv -i en0 | hexdump -x")
+    createProcess (shell (unpack cmd))
     { std_out = CreatePipe
     , std_err = CreatePipe
     }

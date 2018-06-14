@@ -1,19 +1,22 @@
+{-# LANGUAGE OverloadedStrings #-}
+module Tcp ( tcpdump, tcpstream ) where
+
+import           Data.Functor   ((<$))
+import           Data.Text.Lazy (Text)
+import           System.IO      (Handle)
+import           Util           (allocateBlock, buffer, exec, pipeTo)
+
 -- | Main interface to our tcpdump-based entropy generator
 -- note: uses combinators from Util.hs to do the bulk of the
 -- pointer juggling.
-module Tcp ( tcpdump, tcpstream ) where
 
-
-import           Data.Functor ((<$))
-import           System.IO    (Handle)
-import           Util         (allocateBlock, buffer, exec, pipeTo)
 
 -- | Generate entropy from en0, writing 256 bytes to stderr and stdout
 tcpdump :: IO ()
-tcpdump = exec allocateBlock nullBlock
+tcpdump = exec allocateBlock nullBlock tcpcmd
 
 tcpstream :: IO ()
-tcpstream = exec entropyStream nullStream
+tcpstream = exec entropyStream nullStream tcpcmd
 
 -- | Handle streaming 256 byte blocks to stderr
 nullBlock
@@ -34,5 +37,5 @@ nullStream
 nullStream = pipeTo go
   where go h p = buffer h p *> go h p
 
-
-
+tcpcmd :: Text
+tcpcmd = "tcpdump -KnOSx -vvv -i en0 | hexdump -x"
