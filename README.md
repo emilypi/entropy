@@ -2,6 +2,7 @@ This project uses `tcpdump` and `hexdump` to generate hardware entropy in the ve
 
 To run the project, remember that on Mac OS X, at least, to use `tcpdump`, superuser access is necessary, so one must run 
 ```
+cabal sandbox init 
 cabal install --only-dependencies 
 sudo cabal run -- [args]
 ```
